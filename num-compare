@@ -1,0 +1,20 @@
+#!/bin/bash
+
+## Number comparision --> taking inputs from user and doing comparisions.
+
+read a
+read b
+
+if [ $a -eq $b ]
+then
+	echo "$a is equal to $b"
+fi
+if [ $a -lt $b ]
+then
+	echo "$a is less than $b"
+fi
+if [ $a -gt $b ]
+then
+	echo "$a is greater than $b"
+fi
+
