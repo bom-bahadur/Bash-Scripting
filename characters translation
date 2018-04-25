@@ -1,0 +1,5 @@
+#!/bin/bash
+
+## to translate characters "()" to "[]" in given input/text/file
+
+tr "(" "[" | tr ")" "]"
