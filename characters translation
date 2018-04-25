@@ -3,3 +3,8 @@
 ## to translate characters "()" to "[]" in given input/text/file
 
 tr "(" "[" | tr ")" "]"
+
+# In a given fragment of text, delete all the lowercase characters: a - z
+
+tr -d a-z
+
