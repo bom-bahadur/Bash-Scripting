@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#To check if '/tmp' is a directory or not.
+# [ <space> < cmd / argu> <space> ]
+
+if [ -d "/tmp" ]; then
+	echo "/tmp is a dir"
+else
+	echo "/tmp is not a dir"
+fi
