@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Creating NIS user and udating NIS maps via script.
+# Read UserName FullName and Department
+# UID select from /etc/passwd and find the biggest value in the range.
+# GID ranges: HR(0 - 2999), Account(0 - 1799), IT(0 - 3999)
+
+if["$(whoami)"!= "root"] ; then
+  echo "Erro: You must be root to run this command." >&2
+  exit 1
+fi
+
+echo -n "Username(login Name): " ;read Username
+echo -n "Fullname: " ;read Fullname
+echo -n "Dept: " ;read Dept
+pwdfile=/etc/passwd
+
+case $Dept in
+  "HR")
+      gid=1501
+      dir=/home/hr/$Username
+      uid="$(awk -F: '{if (big < $3 && $3 < 2999) big =$3} END { print big +1}' $pwdfile)";;
+  "Account")
+      gid=1501
+      dir=/home/Account/$Username
+      uid="$(awk -F: '{if (big < $3 && $3 < 2999) big =$3} END { print big +1}' $pwdfile)";;
+  "IT") 
+      gid=1501
+      dir=/home/Account/$Username
+      uid="$(awk -F: '{if (big < $3 && $3 < 2999) big =$3} END { print big +1}' $pwdfile)";;
+   *) echo "Invalid Department Name [HR/Account/IT] OR add new department name in script";;
+   
+   esac
+   
+   /usr/sbin/useradd -u $uid -g $gid -c "$Fullname" -d $dir -m -s /usr/bin/csh $Use
+   
+   ## Updating NIS maps
+   
+   yppasswd $Username
+   cd /var/yp
+   make
+   
+   
